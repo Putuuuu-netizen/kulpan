@@ -1,93 +1,208 @@
-// Inisialisasi Animasi Scroll (AOS)
-AOS.init({
-    duration: 1000, // Durasi animasi 1 detik
-    once: true,     // Animasi cuma sekali pas scroll ke bawah
-});
-
-// --- KONFIGURASI ---
-const correctPass = "112325"; // Tanggal jadian (Password)
-
-// Fungsi Cek Password
-function checkPassword() {
-    const input = document.getElementById("pass-input").value;
-    const overlay = document.getElementById("login-overlay");
-    const bgMusic = document.getElementById("bg-music");
-    const errorMsg = document.getElementById("error-msg");
-
-    if (input === correctPass) {
-        // 1. Efek Confetti (Meledak)
-        confetti({
-            particleCount: 200,
-            spread: 100,
-            origin: { y: 0.6 },
-            colors: ['#8d6e63', '#d7ccc8', '#ffccd5']
-        });
-        
-        // 2. Hilangkan Layar Login pelan-pelan
-        overlay.style.transition = "opacity 0.8s ease";
-        overlay.style.opacity = 0;
-        
-        setTimeout(() => {
-            overlay.style.display = "none";
-            
-            // 3. Mulai Musik & Teks
-            bgMusic.play().catch(error => console.log("User must interact first"));
-            startTypewriter();
-            
-            // Ubah icon musik jadi pause
-            document.getElementById("music-icon").classList.add("fa-spin");
-        }, 800);
-    } else {
-        // Kalau salah
-        errorMsg.style.display = "block";
-        // Animasi getar dikit
-        document.querySelector('.input-line').style.borderColor = "red";
-        setTimeout(() => {
-            document.querySelector('.input-line').style.borderColor = "#8d6e63";
-        }, 500);
-    }
-}
-
-function startTypewriter() {
-    // BARIS PENTING: Kosongkan dulu teksnya biar gak dobel
-    document.getElementById("typewriter-text").innerHTML = "";
-
-    new TypeIt("#typewriter-text", {
-        speed: 50, // Kecepatan ngetik (makin kecil makin ngebut)
-        waitUntilVisible: true,
-        cursor: true,
-    })
-    .type("Untuk kulkul, perempuanku.")
-    .pause(1000).break()
-    .type("Selamat datang di usia 17tahun.")
-    .pause(500).break()
-    .type("Dunia mungkin akan semakin berisik,")
-    .pause(500)
-    .type(" tapi tenang saja...")
-    .pause(500).break()
-    .type("Ada aku di sini yang siap mendengarkan.")
-    .go();
-}
-// Fungsi Tombol Musik
-let isPlaying = true;
-function toggleMusic() {
-    const music = document.getElementById("bg-music");
-    const icon = document.getElementById("music-icon");
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy 17th Birthday! ❤️</title>
     
-    if (music.paused) {
-        music.play();
-        icon.classList.remove("fa-play");
-        icon.classList.add("fa-music");
-        icon.classList.add("fa-spin");
-    } else {
-        music.pause();
-        icon.classList.remove("fa-music");
-        icon.classList.remove("fa-spin");
-        icon.classList.add("fa-play");
-    }
-}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>❤️</text></svg>">
+</head>
+<body>
 
-// Biar bisa tekan Enter pas login
-document.getElementById("pass-input").addEventListener("keypress", function(e) {
-    if (e.key === "Enter") checkPassword();
-});
+    <div id="login-overlay">
+        <div class="login-content" data-aos="zoom-in">
+            <h3>The Archive</h3>
+            <p>Masukkan kunci tanggal kita dimulai (DDMMYY)</p>
+            <div class="input-line">
+                <input type="password" id="pass-input" placeholder="......" maxlength="6">
+                <button onclick="checkPassword()"><i class="fas fa-key"></i></button>
+            </div>
+            <p id="error-msg">11 November 2025 sayang... coba lagi.</p>
+        </div>
+    </div>
+
+    <div class="music-control" onclick="toggleMusic()">
+        <i class="fas fa-music" id="music-icon"></i>
+    </div>
+    <audio id="bg-music" loop>
+        <source src="assets/musik.mp3" type="audio/mpeg">
+    </audio>
+
+    <main id="main-content">
+        
+        <section class="hero">
+            <div class="hero-inner">
+                
+                <div class="hero-figure" data-aos="zoom-in" data-aos-duration="1500">
+                    <img src="assets/image-5.jpeg" alt="My Queen" class="hero-img">
+                    
+                    <div class="crown-icon">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                </div>
+
+                <h4 data-aos="fade-down" data-aos-delay="200">Happy Birthday, Love</h4>
+                <h1 data-aos="zoom-in" data-aos-delay="400">Hello, Chapter 17.</h1>
+                <p class="subtitle">Selamat menempuh babak baru kehidupan, kulkul.</p>
+                <div class="line-deco"></div>
+            </div>
+        </section>
+
+        <section class="section-pad">
+            <div class="container small-width text-center">
+                <p id="typewriter-text" class="italic-text"></p>
+            </div>
+        </section>
+
+        <section class="section-pad bg-cream">
+            <div class="container">
+                
+                <div class="split-layout">
+                    <div class="split-img" data-aos="fade-right">
+                        <img src="assets/image-2.jpeg" alt="Beautiful You">
+                    </div>
+                    <div class="split-text" data-aos="fade-left">
+                        <h2>Goodbye, 15 Years</h2>
+                        <p>
+                            Rasanya baru kemarin kita bicara soal hal-hal sepele, dan hari ini kamu sudah resmi meninggalkan angka 16th. 
+                            17 tahun bukan sekadar pergantian angka, buby. Ini adalah bukti bahwa kamu sudah tumbuh menjadi wanita yang jauh lebih kuat, 
+                            lebih dewasa, dan lebih mempesona dari sebelumnya.
+                        </p>
+                        <p>
+                            Terima kasih sudah bertahan melewati masa-masa sulit, terima kasih sudah tetap tersenyum meski hari-harimu berat. 
+                            Aku bangga sekali bisa melihat proses kamu menjadi dewasa.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="split-layout reverse">
+                    <div class="split-img" data-aos="fade-left">
+                        <img src="assets/image-1.jpeg" alt="Us">
+                    </div>
+                    <div class="split-text" data-aos="fade-right">
+                        <h2>Sejak 23 November</h2>
+                        <p>
+                            Sejak tanggal 23 November 2025, kalenderku punya satu tanggal merah favorit baru. 
+                            Bukan hari libur nasional, tapi hari di mana semesta berbaik hati mempertemukan jalan kita.
+                        </p>
+                        <p>
+                            Sejak hari itu, definisi "Pulang" buat aku bukan lagi cuma bangunan rumah, tapi di mana pun ada kamu. 
+                            Terima kasih sudah mengizinkan aku masuk ke hidup kamu dan jadi bagian dari cerita perjalananmu.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="section-pad letter-section">
+            <div class="container small-width">
+                <div class="paper-card" data-aos="fade-up">
+                    <div class="pin"><i class="fas fa-map-pin"></i></div>
+                    <h3>Sebuah Pernyataan Hati</h3>
+                    <p class="date-letter">Ditulis khusus untuk kulkull, di hari istimewanya.</p>
+                    
+                    <div class="letter-body">
+                        <p>
+                            Hai, Cantik. <br>
+                            Selamat ulang tahun yang ke-17, ya. <br><br>
+                            Aku membuat website sederhana ini bukan karena aku ingin pamer skill koding, 
+                            tapi karena aku ingin kasih sesuatu yang abadi. Bunga bisa layu, cokelat bisa habis, 
+                            tapi tulisan di sini akan tetap ada selama internet masih menyala. Sama seperti doaku buat kamu.
+                        </p>
+                        <p>
+                            Di usia 17 ini, mungkin dunia bakal terasa sedikit lebih berat. Tanggung jawab kuliah, 
+                            ekspektasi orang lain, atau mungkin rasa takut akan masa depan. 
+                            Tapi aku mau kamu ingat satu hal: <strong>Kamu tidak sendirian.</strong>
+                        </p>
+                        <p>
+                            Aku janji, bahuku akan selalu siap buat sandaran kalau kamu capek. 
+                            Telingaku akan selalu siap mendengar keluh kesahmu, dari hal paling remeh sampai hal paling berat. 
+                            Aku ingin jadi orang yang selalu tepuk tangan paling keras saat kamu berhasil, 
+                            dan orang yang memeluk paling erat saat kamu merasa gagal.
+                        </p>
+                        <p>
+                            Terima kasih sudah lahir ke dunia ini, Kulkull. 
+                            Terima kasih sudah jadi versi terbaik dari dirimu. 
+                            Semoga di kepala dua ini, kamu semakin bersinar, semakin bahagia, dan semoga... 
+                            nama "Panpan" tetap ada di setiap rencana masa depan kamu.
+                        </p>
+                        <p>
+                            Aku sayang kamu. Hari ini, besok, dan selamanya.
+                        </p>
+                    </div>
+                    
+                    <div class="signature">
+                        <p>Tertanda, yang selalu mengagumimu,</p>
+                        <p class="sign-name">Panpan</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-pad text-center">
+            <div class="container">
+                <h2 class="section-title">Doa-Doaku Untukmu</h2>
+                <p class="subtitle-prayer">Karena tugasku mencintaimu, dan tugas Tuhan menjagamu.</p>
+                
+                <div class="grid-3">
+                    
+                    <div class="wish-item" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="icon-box">
+                            <i class="fas fa-moon"></i>
+                        </div>
+                        <h4>Untuk Hati & Pikiranmu</h4>
+                        <p>
+                            Selamat datang di 17th Doa pertamaku sederhana: Semoga Tuhan menjaga tidurmu dari <em>overthinking</em> yang menyiksa. 
+                            Semoga rasa cemas tentang masa depan diganti dengan keyakinan bahwa semuanya akan baik-baik saja. 
+                            Jangan lupa istirahat ya, dunia gak akan runtuh kalau kamu berhenti sebentar.
+                        </p>
+                    </div>
+
+                    <div class="wish-item" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="100">
+                        <div class="icon-box">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <h4>Untuk Mimpimu</h4>
+                        <p>
+                            Aku tau kamu punya cita-cita besar. Semoga di usia 17 ini, semesta bahu-membahu mempermudah jalanmu. 
+                            Kalau nanti kamu capek atau gagal, ingat ada aku di garis finish yang siap meluk kamu. 
+                            Terbanglah yang tinggi, Keya. Aku pendukung nomor satumu.
+                        </p>
+                    </div>
+
+                    <div class="wish-item" data-aos="fade-up" data-aos-duration="1400" data-aos-delay="200">
+                        <div class="icon-box">
+                            <i class="fas fa-infinity"></i>
+                        </div>
+                        <h4>Untuk "Kita"</h4>
+                        <p>
+                            Semoga kita tumbuh dewasa bersama, bukan saling menuntut tapi saling menuntun. 
+                            Semoga kita bisa melewati fase-fase berat dengan komunikasi yang baik, bukan dengan ego. 
+                            Aku mau kamu, hari ini dan tahun-tahun berikutnya.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>Made with all my ❤️ specially for kulkull 17th Birthday.</p>
+        </footer>
+
+    </main>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://unpkg.com/typeit@8.7.1/dist/index.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
