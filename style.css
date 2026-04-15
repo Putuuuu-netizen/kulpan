@@ -1,0 +1,357 @@
+:root {
+    --primary: #8d6e63;      /* Coklat Kayu */
+    --secondary: #d7ccc8;    /* Cream Kalem */
+    --accent: #efebe9;       /* Background Paper */
+    --dark: #3e2723;         /* Text Gelap */
+    --white: #ffffff;
+    --paper-texture: #fffaf0; /* Warna Kertas Surat */
+    
+    --font-heading: 'Cormorant Garamond', serif; /* Font Mewah */
+    --font-body: 'Montserrat', sans-serif;       /* Font Modern */
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body { 
+    background-color: #faf9f6; 
+    font-family: var(--font-body); 
+    color: var(--dark); 
+    overflow-x: hidden; 
+}
+
+/* --- UTILITIES --- */
+.container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+.small-width { max-width: 600px; }
+.section-pad { padding: 80px 0; }
+.text-center { text-align: center; }
+.bg-cream { background-color: #f3e5f5; /* Sedikit sentuhan ungu sangat muda atau ganti #f5f5f5 */ background: linear-gradient(to bottom, #fff, #fdfbf7); }
+
+/* --- TYPOGRAPHY --- */
+h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: 600; }
+h2 { font-size: 2.5rem; color: var(--primary); margin-bottom: 20px; }
+p { line-height: 1.8; color: #5d4037; font-size: 1rem; }
+
+/* --- LOGIN SCREEN --- */
+#login-overlay { 
+    position: fixed; inset: 0; background: var(--white); z-index: 9999; 
+    display: flex; align-items: center; justify-content: center; 
+    background-image: radial-gradient(#e0e0e0 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+.login-content { text-align: center; background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+.login-content h3 { font-size: 2rem; margin-bottom: 10px; }
+.input-line { border-bottom: 2px solid var(--primary); margin-top: 20px; padding: 5px; display: flex; }
+input { border: none; outline: none; text-align: center; font-size: 1.5rem; letter-spacing: 5px; width: 100%; font-family: var(--font-heading); }
+button { background: none; border: none; cursor: pointer; color: var(--primary); font-size: 1.2rem; transition: 0.3s; }
+button:hover { transform: scale(1.2); color: #5d4037; }
+#error-msg { color: #c62828; font-size: 0.9rem; margin-top: 15px; display: none; }
+
+/* --- HERO SECTION --- */
+.hero { 
+    height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; 
+    background: radial-gradient(circle, #fff 0%, #efebe9 100%); 
+    position: relative;
+}
+.hero h4 { letter-spacing: 5px; text-transform: uppercase; font-size: 1rem; color: #a1887f; margin-bottom: 10px; }
+.hero h1 { font-size: 4.5rem; line-height: 1.1; color: var(--primary); margin: 10px 0; }
+.hero .subtitle { font-size: 1.2rem; font-style: italic; color: #8d6e63; }
+.line-deco { width: 80px; height: 3px; background: var(--primary); margin: 30px auto; }
+.italic-text { font-family: var(--font-heading); font-size: 1.5rem; font-style: italic; color: #5d4037; }
+
+/* --- SPLIT LAYOUT (FOTO + TEKS) --- */
+.split-layout { display: flex; align-items: center; gap: 50px; margin-bottom: 80px; }
+.split-layout.reverse { flex-direction: row-reverse; }
+.split-img { flex: 1; position: relative; }
+.split-img img { 
+    width: 100%; border-radius: 10px; 
+    box-shadow: 15px 15px 0px var(--secondary); 
+    transition: transform 0.5s;
+}
+.split-img:hover img { transform: translateY(-10px); }
+.split-text { flex: 1; padding: 20px; }
+
+/* --- PAPER CARD (SURAT CINTA) --- */
+.letter-section { 
+    background-image: url('https://www.transparenttextures.com/patterns/cubes.png'); /* Pattern halus */
+    background-color: #fafafa;
+}
+.paper-card {
+    background: var(--paper-texture);
+    padding: 60px 40px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    border: 1px solid #e0e0e0;
+    position: relative;
+    text-align: center;
+    transform: rotate(-1deg); /* Miring dikit biar natural */
+}
+.pin { 
+    position: absolute; top: -20px; left: 50%; transform: translateX(-50%); 
+    font-size: 2.5rem; color: #d32f2f; z-index: 10;
+    text-shadow: 2px 5px 5px rgba(0,0,0,0.2);
+}
+.paper-card h3 { font-size: 2.2rem; margin-bottom: 5px; }
+.date-letter { font-size: 0.9rem; color: #999; margin-bottom: 30px; font-style: italic; border-bottom: 1px dashed #ccc; padding-bottom: 20px; }
+.letter-body { text-align: justify; font-size: 1.15rem; font-family: var(--font-heading); color: #4e342e; line-height: 1.9; }
+.signature { margin-top: 50px; text-align: right; }
+.sign-name { font-family: 'Cormorant Garamond'; font-size: 2rem; font-weight: bold; color: var(--primary); margin-top: 10px; transform: rotate(-5deg); display: inline-block; }
+
+/* --- WISHES GRID --- */
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 50px; }
+.wish-item { 
+    background: white; padding: 40px 20px; border-radius: 10px; 
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05); transition: 0.3s; border-top: 5px solid var(--secondary);
+}
+.wish-item:hover { transform: translateY(-10px); border-color: var(--primary); }
+.wish-item .num { font-size: 4rem; color: #eee; font-weight: bold; display: block; line-height: 0.8; margin-bottom: 10px; }
+.wish-item h4 { font-size: 1.5rem; margin-bottom: 10px; }
+
+/* --- MUSIC CONTROL --- */
+.music-control { 
+    position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; 
+    background: var(--white); border-radius: 50%; 
+    display: flex; align-items: center; justify-content: center; 
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15); cursor: pointer; z-index: 100; 
+    color: var(--primary); font-size: 1.5rem; transition: 0.3s;
+}
+.music-control:hover { transform: scale(1.1); color: var(--dark); }
+.fa-spin { animation: fa-spin 2s infinite linear; }
+
+/* --- FOOTER --- */
+footer { text-align: center; padding: 50px 0; background: white; margin-top: 50px; border-top: 1px solid #eee; color: #aaa; font-size: 0.9rem; }
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+    .hero h1 { font-size: 3rem; }
+    .split-layout { flex-direction: column; gap: 30px; }
+    .split-layout.reverse { flex-direction: column; }
+    .grid-3 { grid-template-columns: 1fr; }
+    .paper-card { padding: 40px 20px; transform: rotate(0deg); }
+    .split-img img { box-shadow: 10px 10px 0px var(--secondary); }
+}
+
+/* --- SUBTITLE PRAYER --- */
+.subtitle-prayer {
+    font-family: var(--font-heading);
+    font-style: italic;
+    color: #888;
+    margin-bottom: 50px;
+    font-size: 1.2rem;
+}
+
+/* --- WISH ITEM (UPDATED) --- */
+.wish-item {
+    background: white;
+    padding: 50px 30px; /* Padding lebih besar biar lega */
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(141, 110, 99, 0.1); /* Shadow warna coklat tipis */
+    transition: all 0.4s ease;
+    border-bottom: 5px solid var(--secondary); /* Garis bawah cream */
+    height: 100%; /* Biar tinggi kotaknya sama rata */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.wish-item:hover {
+    transform: translateY(-15px);
+    border-color: var(--primary); /* Garis bawah berubah warna pas di-hover */
+    box-shadow: 0 20px 40px rgba(141, 110, 99, 0.2);
+}
+
+/* --- ICON BOX --- */
+.icon-box {
+    width: 70px;
+    height: 70px;
+    background: var(--bg-cream); /* Background bulat belakang icon */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+    color: var(--primary);
+    font-size: 1.8rem;
+    transition: 0.3s;
+}
+
+.wish-item:hover .icon-box {
+    background: var(--primary);
+    color: white; /* Icon berubah putih pas di-hover */
+    transform: rotateY(360deg); /* Animasi muter dikit */
+}
+
+.wish-item h4 {
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+    color: var(--dark);
+    font-family: var(--font-heading);
+}
+
+.wish-item p {
+    font-size: 1rem;
+    color: #6d6d6d;
+    line-height: 1.7; /* Jarak antar baris biar enak dibaca */
+}
+
+/* --- HERO IMAGE (FOTO LUCU) --- */
+.hero-figure {
+    position: relative;
+    width: 180px;           /* Ukuran lingkaran */
+    height: 180px;
+    margin: 0 auto 30px auto; /* Posisi tengah */
+    border-radius: 50%;
+    border: 5px solid white;
+    box-shadow: 0 10px 30px rgba(141, 110, 99, 0.3); /* Bayangan soft */
+    animation: float-img 3s ease-in-out infinite; /* Animasi melayang */
+}
+
+.hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;      /* Biar foto gak gepeng */
+    border-radius: 50%;
+}
+
+/* Ikon Mahkota */
+.crown-icon {
+    position: absolute;
+    top: -25px;             /* Posisi di atas foto */
+    right: -10px;           /* Miring ke kanan */
+    font-size: 3rem;
+    color: #ffca28;         /* Warna Emas */
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+    transform: rotate(15deg);
+    animation: bounce-crown 2s infinite;
+    z-index: 10;
+    background: white;      /* Background putih bulat kecil */
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Animasi Melayang (Floating) */
+@keyframes float-img {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); } /* Naik dikit */
+    100% { transform: translateY(0px); }
+}
+
+/* Animasi Mahkota Goyang */
+@keyframes bounce-crown {
+    0%, 100% { transform: rotate(15deg) scale(1); }
+    50% { transform: rotate(15deg) scale(1.1); }
+}
+
+/* =========================================
+   MOBILE RESPONSIVE (UPDATE TERAKHIR)
+   Paste di paling bawah style.css
+   ========================================= */
+
+   @media screen and (max-width: 768px) {
+
+    /* 1. CONTAINER & UTILS */
+    .container {
+        padding: 0 25px; /* Kasih jarak pinggir biar gak mepet layar */
+    }
+    .section-pad {
+        padding: 50px 0; /* Kurangi jarak antar section biar gak terlalu jauh scrollnya */
+    }
+
+    /* 2. HERO SECTION (FOTO LUCU & JUDUL) */
+    .hero h1 {
+        font-size: 3rem; /* Kecilin font judul biar muat */
+        margin-top: 15px;
+    }
+    .hero .subtitle {
+        font-size: 1rem;
+        padding: 0 20px;
+    }
+    .hero-figure {
+        width: 150px; /* Kecilin foto bulatnya dikit */
+        height: 150px;
+    }
+    .crown-icon {
+        width: 45px; height: 45px;
+        font-size: 2rem;
+        top: -15px; right: -5px;
+    }
+
+    /* 3. LOGIN SCREEN */
+    .login-content {
+        width: 85%; /* Biar box login gak kekecilan/kegedean */
+        padding: 30px 20px;
+    }
+    input {
+        font-size: 1.2rem; /* Kecilin font input password */
+        letter-spacing: 3px;
+    }
+
+    /* 4. SPLIT LAYOUT (FOTO & TEKS SAMPING) */
+    /* Ini penting biar gak numpuk aneh */
+    .split-layout {
+        flex-direction: column; /* Ubah jadi atas-bawah */
+        gap: 30px;
+        margin-bottom: 50px;
+        text-align: center; /* Teks jadi rata tengah biar rapi di HP */
+    }
+    
+    .split-layout.reverse {
+        flex-direction: column; /* Tetap atas-bawah walaupun reverse */
+    }
+
+    /* Trik biar Foto selalu di ATAS Teks di HP */
+    .split-layout .split-img {
+        order: 1; 
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .split-layout .split-text {
+        order: 2;
+        padding: 0; /* Hilangkan padding samping */
+    }
+    
+    .split-text h2 {
+        font-size: 2rem; /* Kecilin judul per paragraf */
+    }
+
+    /* 5. PAPER CARD (SURAT CINTA) */
+    .paper-card {
+        padding: 40px 25px; /* Kurangi padding kertas */
+        transform: rotate(0deg); /* Lurusin kertasnya biar teks kebaca enak */
+        margin: 0 10px; /* Kasih margin dikit */
+    }
+    .paper-card h3 {
+        font-size: 1.8rem;
+    }
+    .letter-body {
+        font-size: 1rem; /* Ukuran font surat standar HP */
+        text-align: left; /* Teks surat rata kiri (atau justify) */
+        line-height: 1.6;
+    }
+    .sign-name {
+        font-size: 1.5rem;
+    }
+
+    /* 6. WISHES GRID (DOA-DOA) */
+    .grid-3 {
+        grid-template-columns: 1fr; /* Jadi 1 kolom ke bawah */
+        gap: 20px;
+    }
+    .wish-item {
+        padding: 30px 20px;
+        /* Biar ga terlalu panjang ke bawah */
+    }
+
+    /* 7. MUSIC BUTTON */
+    .music-control {
+        width: 50px; height: 50px;
+        bottom: 20px; right: 20px;
+        font-size: 1.2rem;
+        background: rgba(255, 255, 255, 0.9); /* Sedikit transparan biar gak ganggu konten */
+    }
+    
+    /* 8. FOOTER */
+    footer {
+        padding: 30px 20px 80px 20px; /* Tambah padding bawah biar teks gak ketutupan tombol musik */
+    }
+}
